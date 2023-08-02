@@ -6,8 +6,6 @@ import java.sql.PreparedStatement;
 import javax.swing.table.DefaultTableModel;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,7 +20,7 @@ public class EmpleadosCRUD extends javax.swing.JFrame {
     protected static Connection cn;
     
     /**
-     * Creates new form ClientesCRUD
+     * Constructor de la clase EmpleadosCRUD. Inicializa la interfaz gráfica y carga datos iniciales.
      */
     public EmpleadosCRUD() {
         initComponents();
@@ -340,6 +338,14 @@ public class EmpleadosCRUD extends javax.swing.JFrame {
         mostrarDatos("");
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
+    /**
+     * Maneja el evento del botón "Registrar" del formulario.
+     * Guarda los datos del nuevo empleado en la base de datos con la información ingresada en los campos del formulario.
+     * Valida que los campos obligatorios no estén vacíos y que los campos numéricos tengan un formato válido.
+     * Después de realizar el registro exitoso, muestra un mensaje de éxito y actualiza la tabla de empleados para mostrar el nuevo registro.
+     * 
+     * @param evt El evento de acción generado por hacer clic en el botón "Registrar".
+     */
     private void btnRegistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarActionPerformed
         String id =txtId.getText();
         String nombreEmpleado = txtNombreEmpleado.getText();
@@ -419,6 +425,13 @@ public class EmpleadosCRUD extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
+    /**
+     * Maneja el evento del clic del mouse en la tabla de empleados (tablaEmpleados).
+     * Actualiza los campos del formulario con los datos del empleado seleccionado en la tabla.
+     * Habilita o deshabilita botones según el estado de la selección.
+     * 
+     * @param evt El evento generado al hacer clic con el mouse en la tabla de empleados.
+     */
     private void tablaEmpleadosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEmpleadosMouseClicked
         btnActualizar.setEnabled(true);
         btnRegistrar.setEnabled(false);
@@ -456,23 +469,55 @@ public class EmpleadosCRUD extends javax.swing.JFrame {
         
         this.comboCodigoDepartamento.setSelectedItem(this.tablaEmpleados.getValueAt(fila, 9).toString());
     }//GEN-LAST:event_tablaEmpleadosMouseClicked
-
+    
+    /**
+    * Actualiza la tabla de empleados al momento de que el usuario ingresa o modifica el texto en el campo de búsqueda.
+    * El método obtiene el texto ingresado en el campo de búsqueda y muestra los empleados que coincidan con ese criterio de búsqueda.
+    * 
+    * @param evt El evento generado al liberar una tecla mientras el foco está en el campo de búsqueda (txtBuscar).
+    */
     private void txtBuscarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyReleased
         mostrarDatos(txtBuscar.getText());
     }//GEN-LAST:event_txtBuscarKeyReleased
 
+    /**
+     * Actualiza la tabla de empleados cuando el usuario selecciona una opción diferente en el JComboBox "comboBuscarPor".
+     * El método obtiene el texto ingresado en el campo de búsqueda y muestra los empleados que coincidan con ese criterio de búsqueda.
+     * 
+     * @param evt El evento generado al seleccionar una opción diferente en el JComboBox "comboBuscarPor".
+     */
     private void comboBuscarPorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBuscarPorActionPerformed
         mostrarDatos(txtBuscar.getText());
     }//GEN-LAST:event_comboBuscarPorActionPerformed
 
+    /**
+     * Actualiza la tabla de empleados cuando el usuario selecciona una opción diferente en el JComboBox "comboTipoBusqueda".
+     * El método obtiene el texto ingresado en el campo de búsqueda y muestra los empleados que coincidan con ese criterio de búsqueda.
+     * 
+     * @param evt El evento generado al seleccionar una opción diferente en el JComboBox "comboTipoBusqueda".
+     */
     private void comboTipoBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboTipoBusquedaActionPerformed
         mostrarDatos(txtBuscar.getText());
     }//GEN-LAST:event_comboTipoBusquedaActionPerformed
 
+    /**
+     * Actualiza la tabla de empleados cuando el usuario selecciona una opción diferente en el JComboBox "comboOrdenar".
+     * El método obtiene el texto ingresado en el campo de búsqueda y muestra los empleados que coincidan con ese criterio de búsqueda.
+     * 
+     * @param evt El evento generado al seleccionar una opción diferente en el JComboBox "comboOrdenar".
+     */
     private void comboOrdenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboOrdenarActionPerformed
         mostrarDatos(txtBuscar.getText());
     }//GEN-LAST:event_comboOrdenarActionPerformed
 
+    /**
+    * Maneja el evento del botón "Actualizar" del formulario.
+    * Actualiza los datos del empleado correspondiente en la base de datos con la información ingresada en los campos del formulario.
+    * Valida que los campos obligatorios no estén vacíos y que los campos numéricos tengan un formato válido.
+    * Después de realizar la actualización, muestra un mensaje de éxito y restablece el formulario para futuras acciones.
+    * 
+    * @param evt El evento de acción generado por hacer clic en el botón "Actualizar".
+    */
     private void btnActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarActionPerformed
         String id =txtId.getText();
         String nombreEmpleado = txtNombreEmpleado.getText();
@@ -558,7 +603,16 @@ public class EmpleadosCRUD extends javax.swing.JFrame {
             System.out.println("No se pudo actualizar: " + e);
         }
     }//GEN-LAST:event_btnActualizarActionPerformed
-
+    
+    /**
+     * Maneja el evento del botón "Eliminar" del menú.
+     * Elimina el registro del empleado correspondiente en la base de datos según el ID ingresado en el campo de texto "txtId".
+     * Antes de realizar la eliminación, muestra un cuadro de diálogo de confirmación para asegurar que el usuario realmente desea eliminar el registro.
+     * Si el usuario confirma la eliminación, se ejecuta la sentencia SQL de eliminación en la base de datos y se actualiza la tabla de empleados.
+     * Después de eliminar el registro, se limpian los campos del formulario para dejarlo listo para futuras acciones.
+     * 
+     * @param evt El evento de acción generado por hacer clic en el botón "Eliminar" del menú (no se usa).
+     */
     private void btnMenuEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuEliminarActionPerformed
         String sentenciadml = "DELETE FROM empleados WHERE nDIEmp='" + txtId.getText() + "'";
         Object[] opciones = {"Sí", "No"};
@@ -610,7 +664,25 @@ public class EmpleadosCRUD extends javax.swing.JFrame {
     private javax.swing.JTextField txtNombreEmpleado;
     private javax.swing.JTextField txtSalario;
     // End of variables declaration//GEN-END:variables
-
+    
+    /**
+     * Muestra los datos de empleados en la tabla de visualización, filtrados por una búsqueda específica.
+     * 
+     * @param busqueda La cadena de texto utilizada como criterio de búsqueda para filtrar los empleados en la tabla.
+     * 
+     * El método realiza las siguientes acciones:
+     * 
+     * 1. Crea un nuevo modelo de tabla (`DefaultTableModel`) para mostrar los datos de los empleados.
+     * 2. Agrega las columnas de la tabla: "ID", "Nombre de Empleado", "Sexo", "Fecha de Nacimiento", "Fecha de Incorporación", "Salario", "Comisión", "Cargo", "ID de Jefe" y "Código de Departamento".
+     * 3. Asigna el modelo de tabla recién creado a la tabla de empleados (`tablaEmpleados`).
+     * 4. Obtiene el campo de búsqueda para la consulta SQL llamando al método `getBuscarPor(comboBuscarPor)` de la clase `MetodosBusqueda`.
+     * 5. Obtiene el formato de búsqueda para la consulta SQL llamando al método `getFormatoBusqueda(busqueda, comboTipoBusqueda)` de la clase `MetodosBusqueda`.
+     * 6. Obtiene el criterio de ordenación para la consulta SQL llamando al método `getOrdenarPor(comboOrdenar)` de la clase `MetodosBusqueda`.
+     * 7. Construye la consulta SQL utilizando los valores obtenidos en los pasos anteriores y las agrega al `WHERE` y `ORDER BY` para filtrar y ordenar los resultados.
+     * 8. Ejecuta la consulta SQL en la base de datos y obtiene el resultado en un objeto `ResultSet`.
+     * 9. Itera a través del resultado del `ResultSet` y agrega los datos de cada empleado como una fila en el modelo de tabla.
+     * 10. Si ocurre un error durante la consulta o el procesamiento de los datos, muestra un mensaje de error utilizando `JOptionPane`.
+     */
     private void mostrarDatos(String busqueda) {
         DefaultTableModel modelo = new TablaNoEditable();
         modelo.addColumn("ID");
@@ -662,6 +734,10 @@ public class EmpleadosCRUD extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Este método se utiliza para resetear los campos del formulario después de registrar o editar un empleado,
+     * dejándolos listos para un nuevo registro o edición.
+     */
     private void limpiarCampos() {
         btnActualizar.setEnabled(false);
         btnRegistrar.setEnabled(true);

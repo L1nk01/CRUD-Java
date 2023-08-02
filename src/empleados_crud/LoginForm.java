@@ -1,15 +1,14 @@
 package empleados_crud;
 
 import java.sql.Connection;
-import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 /**
  *
  * Emmanuel Campos 2022-1855
  * 
  */
+
 public class LoginForm extends javax.swing.JFrame {
     
     /**
@@ -151,6 +150,12 @@ public class LoginForm extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Maneja el evento de clic en el botón "btnLogin".
+     * Valida los campos de usuario, contraseña, dirección IP y base de datos.
+     * Establece una conexión a la base de datos utilizando la clase "ConexionMySQL".
+     * Si la conexión es exitosa, muestra la interfaz gráfica de la aplicación "EmpleadosCRUD" y oculta la ventana actual.
+     */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         ConexionMySQL con = new ConexionMySQL();
         MetodosValidacion mv = new MetodosValidacion();
@@ -160,7 +165,7 @@ public class LoginForm extends javax.swing.JFrame {
         String ip = txtDireccion.getText();
         String baseDeDatos = (String) comboBaseDeDatos.getSelectedItem();
         
-        if (!mv.validarCampo(usuario) || !mv.validarCampo(password) || !mv.validarCampo(ip) || !mv.validarComboBox(baseDeDatos)) {
+        if (!mv.validarCampo(usuario) || !mv.validarCampo(ip) || !mv.validarComboBox(baseDeDatos)) {
             JOptionPane.showMessageDialog(null, "No puede dejar campos vacios");
             return;
         }
@@ -175,6 +180,11 @@ public class LoginForm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    /**
+     * Maneja el evento de clic en el botón "btnRellenar".
+     * Rellena los campos de usuario, contraseña, dirección IP y base de datos con valores predefinidos.
+     * Este método se utiliza para facilitar el inicio de sesión en la aplicación con datos predeterminados.
+     */
     private void btnRellenarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRellenarActionPerformed
         txtUsuario.setText("admin");
         txtPassword.setText("@jSwi4@teZFAl3S)");
