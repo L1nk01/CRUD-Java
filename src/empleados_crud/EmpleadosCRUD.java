@@ -10,8 +10,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * Emmanuel Campos 2022-1855
- * 
+ * @author Emmanuel Campos 2022-1855
  */
 
 public class EmpleadosCRUD extends javax.swing.JFrame {
